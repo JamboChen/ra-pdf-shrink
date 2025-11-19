@@ -50,7 +50,8 @@ export default function App() {
       );
 
       // 下载压缩后的 PDF
-      const blob = new Blob([outputBytes], { type: "application/pdf" });
+      const bytes = new Uint8Array(outputBytes);
+      const blob = new Blob([bytes], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
