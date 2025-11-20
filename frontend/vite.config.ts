@@ -7,6 +7,19 @@ import topLevelAwait from "vite-plugin-top-level-await";
 
 // https://vite.dev/config/
 export default defineConfig({
+  worker: {
+    format: "es",
+  },
+  optimizeDeps: {
+    exclude: ["ra_pdf"],
+  },
+  assetsInclude: ["**/*.wasm"],
+  server: {
+    headers: {
+      // 确保 WASM 可以被缓存
+      "Cache-Control": "public, max-age=31536000",
+    },
+  },
   plugins: [react(), wasm(), topLevelAwait(), tailwindcss()],
   resolve: {
     alias: {
